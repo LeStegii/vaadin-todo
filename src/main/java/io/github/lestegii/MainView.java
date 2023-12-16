@@ -1,4 +1,4 @@
-package com.example.demo;
+package io.github.lestegii;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;

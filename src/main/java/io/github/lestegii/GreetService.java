@@ -1,4 +1,4 @@
-package com.example.demo;
+package io.github.lestegii;
 
 public class GreetService {
 
