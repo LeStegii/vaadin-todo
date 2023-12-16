@@ -1,4 +1,4 @@
-package io.github.lestegii;
+package io.github.lestegii.todo;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;

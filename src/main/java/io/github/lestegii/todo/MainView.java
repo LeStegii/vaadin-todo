@@ -1,4 +1,4 @@
-package io.github.lestegii;
+package io.github.lestegii.todo;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;

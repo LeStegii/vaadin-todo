@@ -1,4 +1,4 @@
-package io.github.lestegii;
+package io.github.lestegii.todo;
 
 public class GreetService {
 
