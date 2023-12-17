@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Lilita+One");
+
+:root {
+  --color-primary: #7289da;
+  --color-text: #fff;
+}
+
+html {
+  --lumo-primary-color: var(--color-primary);
+  --lumo-font-family: Open Sans;
+
+}
+
+h1 {
+  font-family: Lilita One, serif;
+}
+
+vaadin-button {
+  background: var(--color-primary);
+  color: var(--color-text);
+  border: 1px;
+  font-weight: bold;
+}
+
+vaadin-grid {
+  border-radius: 1em;
+  border-width: medium;
+}
+
+vaadin-grid::part(cell) {
+  background-color: transparent;
+  border-width: medium;
+}
