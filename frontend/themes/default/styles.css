@@ -14,6 +14,7 @@ html {
 
 h1 {
   font-family: Lilita One, serif;
+  text-shadow: rgb(128, 128, 128) 0.1em 0.1em 0.1em;
 }
 
 vaadin-button {
@@ -31,4 +32,19 @@ vaadin-grid {
 vaadin-grid::part(cell) {
   background-color: transparent;
   border-width: medium;
+}
+
+a {
+  color: var(--color-primary);
+  font-family: Lilita One, serif;
+  font-size: 1.25em;
+}
+
+a[highlight] {
+  text-shadow: black 0.05em 0.05em 0.05em;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #6b7dbc;
 }

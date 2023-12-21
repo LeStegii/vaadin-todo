@@ -4,6 +4,8 @@ import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridSortOrder;
+import com.vaadin.flow.component.grid.GridSortOrderBuilder;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.shared.Registration;
 import io.github.lestegii.todo.data.entity.Entry;
@@ -41,9 +43,7 @@ public class EntryGrid extends Grid<Entry> {
         });
         addComponentColumn(entry -> {
             Button button = new Button("Edit", VaadinIcon.PENCIL.create());
-            button.addClickListener(click -> {
-                fireEvent(new EditEntryEvent(this, entry));
-            });
+            button.addClickListener(click -> fireEvent(new EditEntryEvent(this, entry)));
             return button;
         });
     }
