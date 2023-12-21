@@ -11,6 +11,7 @@ import io.github.lestegii.todo.component.Toolbar;
 import io.github.lestegii.todo.data.entity.Entry;
 import io.github.lestegii.todo.data.entity.Status;
 import io.github.lestegii.todo.service.EntryService;
+import jakarta.annotation.security.PermitAll;
 
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import java.util.Set;
  * The main view contains a list of entries and a form for adding new entries.
  */
 @PageTitle("List | Todo")
+@PermitAll
 @Route(value = "list", layout = MainView.class)
 public class TodoView extends VerticalLayout {
 
