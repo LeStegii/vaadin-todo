@@ -1,5 +1,6 @@
 package io.github.lestegii.todo.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +10,6 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents an entry in the todo list.
@@ -22,6 +22,7 @@ public class Entry {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private long id;
     @NotNull
     @NotEmpty
@@ -37,12 +38,15 @@ public class Entry {
     private Status status;
     private String category;
     @NotNull
+    @JsonIgnore
     private LocalDateTime created;
     @NotNull
+    @JsonIgnore
     private LocalDateTime updated;
     private LocalDateTime dueDate;
     @NotNull
-    private UUID owner;
+    @JsonIgnore
+    private String owner;
 
     /**
      * Default constructor for JPA.
@@ -62,7 +66,7 @@ public class Entry {
      * @param priority         the priority
      * @param status           the status
      */
-    public Entry(@NotNull String title, @Nullable String shortDescription, @NotNull String description, @NotNull Priority priority, @NotNull Status status, @Nullable String category, @Nullable LocalDateTime dueDate, @NotNull UUID owner) {
+    public Entry(@NotNull String title, @Nullable String shortDescription, @NotNull String description, @NotNull Priority priority, @NotNull Status status, @Nullable String category, @Nullable LocalDateTime dueDate, @NotNull String owner) {
         this.title = title;
         this.shortDescription = shortDescription;
         this.description = description;
@@ -84,7 +88,7 @@ public class Entry {
      * @param status      the status
      * @param owner       the owner
      */
-    public Entry(@NotNull String title, @NotNull String description, @NotNull Priority priority, @NotNull Status status, @NotNull UUID owner) {
+    public Entry(@NotNull String title, @NotNull String description, @NotNull Priority priority, @NotNull Status status, @NotNull String owner) {
         this(title, null, description, priority, status, null, null, owner);
     }
 
@@ -98,7 +102,7 @@ public class Entry {
      * @param category    the category
      * @param dueDate     the due date
      */
-    public Entry(@NotNull String title, @NotNull String description, @NotNull Priority priority, @NotNull Status status, @Nullable String category, @Nullable LocalDateTime dueDate, @NotNull UUID owner) {
+    public Entry(@NotNull String title, @NotNull String description, @NotNull Priority priority, @NotNull Status status, @Nullable String category, @Nullable LocalDateTime dueDate, @NotNull String owner) {
         this(title, null, description, priority, status, category, dueDate, owner);
     }
 
@@ -195,11 +199,15 @@ public class Entry {
         return this.id;
     }
 
-    public @NotNull UUID owner() {
+    public @NotNull String owner() {
         return owner;
     }
 
-    public void owner(@NotNull UUID owner) {
+    public void owner(@NotNull String owner) {
         this.owner = owner;
+    }
+
+    public Entry anonymousCopy() {
+        return new Entry(title, shortDescription, description, priority, status, category, dueDate, null);
     }
 }

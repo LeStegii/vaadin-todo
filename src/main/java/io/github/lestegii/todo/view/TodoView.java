@@ -1,6 +1,7 @@
 package io.github.lestegii.todo.view;
 
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -19,8 +20,8 @@ import java.util.Set;
  * The main view contains a list of entries and a form for adding new entries.
  */
 @PageTitle("List | Todo")
+@Route(value = "", layout = MainView.class)
 @PermitAll
-@Route(value = "list", layout = MainView.class)
 public class TodoView extends VerticalLayout {
 
     private final Toolbar toolbar;
@@ -32,7 +33,13 @@ public class TodoView extends VerticalLayout {
         this.entryService = entryService;
 
         toolbar = new Toolbar();
-        grid = new EntryGrid(entryService.findAll());
+        grid = new EntryGrid(
+                entryService.findAll(
+                        UI.getCurrent().getSession().getAttribute("username").toString(),
+                        null,
+                        null
+                )
+        );
 
         addClassName("list-view");
         setSizeFull();
@@ -46,11 +53,10 @@ public class TodoView extends VerticalLayout {
         toolbar.addEntryAddListener(event -> openForm(new Entry()));
 
         add(new H1(new Text("TODO List")), toolbar, grid);
-
     }
 
     private void refreshGrid(String filter, Set<Status> statuses) {
-        grid.setItems(entryService.findAll(filter, statuses));
+        grid.setItems(entryService.findAll(UI.getCurrent().getSession().getAttribute("username").toString(), filter, statuses));
     }
 
     private void openForm(Entry entry) {

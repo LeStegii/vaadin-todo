@@ -1,9 +1,9 @@
 buildscript {
-    repositories {
-    	mavenCentral()
-	    maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
-			maven { setUrl("https://repo.spring.io/milestone") }
-		}
+	repositories {
+		mavenCentral()
+		maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
+		maven { setUrl("https://repo.spring.io/milestone") }
+	}
 }
 plugins {
 	id 'org.springframework.boot' version '3.1.5'
@@ -31,6 +31,8 @@ dependencies {
 	implementation('com.h2database:h2')
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('org.springframework.boot:spring-boot-starter-security')
+	implementation('org.vaadin.olli:file-download-wrapper:7.0.0')
+	implementation('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

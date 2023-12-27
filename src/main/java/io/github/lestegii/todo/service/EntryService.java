@@ -48,8 +48,8 @@ public class EntryService {
         return entryRepository.findAllCategories();
     }
 
-    public List<Entry> findAll(String filter, Collection<Status> statuses) {
-        return entryRepository.findAll(filter, statuses == null ? Arrays.asList(Status.values()) : statuses);
+    public List<Entry> findAll(String user, String filter, Collection<Status> statuses) {
+        return entryRepository.findAll(user, filter, statuses == null ? Arrays.asList(Status.values()) : statuses);
     }
 
 }

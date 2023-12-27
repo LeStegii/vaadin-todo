@@ -3,6 +3,7 @@ package io.github.lestegii.todo.security;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import io.github.lestegii.todo.view.LoginView;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,13 +14,13 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
-public class SecurityConfiguration extends VaadinWebSecurity {
+@Configuration
+public class SecurityConfig extends VaadinWebSecurity {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth ->
                 auth.requestMatchers(
-                        // Allow images to be viewed by anyone
                         AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")
                 ).permitAll()
         );
@@ -31,15 +32,14 @@ public class SecurityConfiguration extends VaadinWebSecurity {
     public UserDetailsService users() {
         UserDetails user = User.builder()
                 .username("user")
-                .password("{bcrypt}$2a$12$FxqQj4d32dXDru1KBikilOBFbmaZCx4OCfANiErEspj.ieefOI3XK") // password
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW") // "password"
                 .roles("USER")
                 .build();
         UserDetails admin = User.builder()
                 .username("admin")
-                .password("{bcrypt}$2a$12$uBSrdsnqXuwZ7O6RSOnZvO3fC9qdWu7cmigcx79KKX2qyUi87xORy") // adminpassword
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
                 .roles("USER", "ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
-
 }
