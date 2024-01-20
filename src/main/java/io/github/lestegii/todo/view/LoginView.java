@@ -9,7 +9,7 @@ import com.vaadin.flow.router.*;
 import jakarta.annotation.security.PermitAll;
 
 @PageTitle("Login | Todo")
-@Route(value = "login")
+@Route("login")
 @PermitAll
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 

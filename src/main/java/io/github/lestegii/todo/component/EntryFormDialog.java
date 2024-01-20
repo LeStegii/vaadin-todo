@@ -108,7 +108,7 @@ public class EntryFormDialog extends Dialog {
         // Binding fields automatically doesn't work in this case because of the custom priority field and errors
         binder.forField(title).asRequired("Please enter a title.").bind(Entry::title, Entry::title);
         binder.forField(shortDescription).withValidator(
-                new StringLengthValidator("Your summary should at least 50 characters long.", null, 50)
+                new StringLengthValidator("Your summary should at most 50 characters long.", null, 50)
         ).bind(Entry::shortDescription, Entry::shortDescription);
         binder.forField(description).asRequired("Please enter a description.").bind(Entry::description, Entry::description);
         binder.forField(status).asRequired("Please select a status.").bind(Entry::status, Entry::status);

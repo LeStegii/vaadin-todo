@@ -21,7 +21,6 @@ public class MainView extends AppLayout {
         init();
     }
 
-
     private void init() {
         addToNavbar(header);
         addToDrawer(links);
