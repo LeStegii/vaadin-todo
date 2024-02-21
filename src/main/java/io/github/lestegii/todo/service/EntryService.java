@@ -45,7 +45,7 @@ public class EntryService {
     }
 
     public List<String> findAllCategories() {
-        return entryRepository.findAllCategories();
+        return entryRepository.findAllCategories().stream().filter(c -> c != null && !c.isBlank()).toList();
     }
 
     public List<Entry> findAll(String user, String filter, Collection<Status> statuses) {

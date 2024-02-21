@@ -19,7 +19,8 @@ public interface EntryRepository extends JpaRepository<Entry, Long> {
             "order by e.created desc")
     List<Entry> findAll(@Param("user") String user, @Param("filter") String filter, @Param("statuses") Collection<Status> statuses);
 
-    @Query("select distinct e.category from Entry e")
+    // Finds all categories of the entries
+    @Query("select distinct e.category from Entry e where e.category is not null and e.category != ''")
     List<String> findAllCategories();
 
 }

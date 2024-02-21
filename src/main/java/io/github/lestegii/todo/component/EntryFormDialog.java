@@ -105,17 +105,6 @@ public class EntryFormDialog extends Dialog {
         }));
         downloader.wrapComponent(downloadButton);
 
-        // Binding fields automatically doesn't work in this case because of the custom priority field and errors
-        binder.forField(title).asRequired("Please enter a title.").bind(Entry::title, Entry::title);
-        binder.forField(shortDescription).withValidator(
-                new StringLengthValidator("Your summary should at most 50 characters long.", null, 50)
-        ).bind(Entry::shortDescription, Entry::shortDescription);
-        binder.forField(description).asRequired("Please enter a description.").bind(Entry::description, Entry::description);
-        binder.forField(status).asRequired("Please select a status.").bind(Entry::status, Entry::status);
-        binder.forField(priority).asRequired("Please select a priority.").bind(Entry::priority, Entry::priority);
-        binder.bind(category, Entry::category, Entry::category);
-        binder.bind(dueDate, Entry::dueDate, Entry::dueDate);
-
         // Text
         title.setRequired(true);
         title.setMinLength(1);
@@ -130,13 +119,9 @@ public class EntryFormDialog extends Dialog {
         status.setRequired(true);
 
         // Priority
-        List<Priority> validPriorities = Arrays.stream(Priority.values()).filter(priority -> priority != Priority.OTHER).toList();
+        List<Priority> validPriorities = Arrays.stream(Priority.values()).toList();
         priority.setItems(validPriorities);
-        priority.setAllowCustomValue(true);
-        priority.addCustomValueSetListener(event -> {
-            priority.setValue(Priority.OTHER);
-            priority.setPlaceholder(event.getDetail());
-        });
+        priority.setAllowCustomValue(false);
         priority.setRequired(true);
 
         // Category
@@ -148,6 +133,17 @@ public class EntryFormDialog extends Dialog {
         dueDate.setRequiredIndicatorVisible(true);
         dueDate.setValue(LocalDateTime.now().plusDays(1));
         dueDate.setMin(LocalDateTime.now());
+
+        // Binding fields automatically doesn't work in this case because of the custom priority field and errors
+        binder.forField(title).asRequired("Please enter a title.").bind(Entry::title, Entry::title);
+        binder.forField(shortDescription).withValidator(
+                new StringLengthValidator("Your summary should at most 50 characters long.", null, 50)
+        ).bind(Entry::shortDescription, Entry::shortDescription);
+        binder.forField(description).asRequired("Please enter a description.").bind(Entry::description, Entry::description);
+        binder.forField(status).asRequired("Please select a status.").bind(Entry::status, Entry::status);
+        binder.forField(priority).asRequired("Please select a priority.").bind(Entry::priority, Entry::priority);
+        binder.bind(category, Entry::category, Entry::category);
+        binder.bind(dueDate, Entry::dueDate, Entry::dueDate);
 
         // Buttons
         saveButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
@@ -178,6 +174,7 @@ public class EntryFormDialog extends Dialog {
     }
 
     private void validateAndSave() {
+        System.out.println(entry);
         if (!binder.validate().hasErrors()) {
             try {
                 if (entry.created() == null) {

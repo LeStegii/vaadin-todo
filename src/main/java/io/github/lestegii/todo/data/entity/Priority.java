@@ -12,8 +12,7 @@ public enum Priority {
     HIGH("High"),
     MEDIUM("Medium"),
     LOW("Low"),
-    VERY_LOW("Very low"),
-    OTHER();
+    VERY_LOW("Very low");
 
     private final @Nullable String priority;
 

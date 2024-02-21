@@ -33,7 +33,6 @@ public class Entry {
     private String description;
     @NotNull
     private Priority priority;
-    private String customPriority;
     @NotNull
     private Status status;
     private String category;
@@ -104,14 +103,6 @@ public class Entry {
      */
     public Entry(@NotNull String title, @NotNull String description, @NotNull Priority priority, @NotNull Status status, @Nullable String category, @Nullable LocalDateTime dueDate, @NotNull String owner) {
         this(title, null, description, priority, status, category, dueDate, owner);
-    }
-
-    public @Nullable String customPriority() {
-        return this.customPriority;
-    }
-
-    public void customPriority(@Nullable String customPriority) {
-        this.customPriority = customPriority;
     }
 
     public void created(@NotNull LocalDateTime created) {
@@ -209,5 +200,22 @@ public class Entry {
 
     public Entry anonymousCopy() {
         return new Entry(title, shortDescription, description, priority, status, category, dueDate, null);
+    }
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", description='" + description + '\'' +
+                ", priority=" + priority +
+                ", status=" + status +
+                ", category='" + category + '\'' +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", dueDate=" + dueDate +
+                ", owner='" + owner + '\'' +
+                '}';
     }
 }
