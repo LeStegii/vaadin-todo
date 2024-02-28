@@ -7,6 +7,7 @@ import io.github.lestegii.todo.data.entity.Status;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -45,7 +46,7 @@ public class EntryService {
     }
 
     public List<String> findAllCategories() {
-        return entryRepository.findAllCategories().stream().filter(c -> c != null && !c.isBlank()).toList();
+        return new ArrayList<>(entryRepository.findAllCategories().stream().filter(c -> c != null && !c.isBlank()).toList());
     }
 
     public List<Entry> findAll(String user, String filter, Collection<Status> statuses) {

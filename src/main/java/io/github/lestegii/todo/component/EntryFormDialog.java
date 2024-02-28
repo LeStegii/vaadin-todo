@@ -127,6 +127,11 @@ public class EntryFormDialog extends Dialog {
         // Category
         category.setItems(categories);
         category.setAllowCustomValue(true);
+        category.addCustomValueSetListener(event -> {
+            categories.add(event.getDetail());
+            category.setItems(categories);
+            category.setValue(event.getDetail());
+        });
         category.setRequired(false);
 
         // Due date
@@ -174,7 +179,6 @@ public class EntryFormDialog extends Dialog {
     }
 
     private void validateAndSave() {
-        System.out.println(entry);
         if (!binder.validate().hasErrors()) {
             try {
                 if (entry.created() == null) {
